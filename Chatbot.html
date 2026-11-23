@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GYIT - Guard Your Integrated Technology | Jasa CCTV Profesional</title>
+    <style>
+        /* Skema Warna Coklat Susu (Milk Chocolate Palette) */
+        :root {
+            --coklat-tua: #4A3326;
+            --coklat-susu: #A07855;
+            --coklat-muda: #D4B79B;
+            --cream-bg: #FAF6F0;
+            --cream-card: #FFFFFF;
+            --text-color: #333333;
+            --accent-gold: #C59B27;
+            --shadow: rgba(74, 51, 38, 0.15);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--cream-bg); color: var(--text-color); line-height: 1.6; }
+
+        /* 1. Header Navigation & Logo Kiri Atas */
+        header {
+            background-color: var(--coklat-tua);
+            color: white;
+            padding: 12px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 4px 10px var(--shadow);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 48px;
+            width: auto;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--coklat-muda);
+            letter-spacing: 1px;
+        }
+
+        .logo-text span { color: white; }
+
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav a { color: white; text-decoration: none; font-weight: 500; font-size: 14.5px; transition: 0.3s; }
+        nav a:hover { color: var(--coklat-muda); }
+
+        .btn-header {
+            background-color: var(--coklat-susu);
+            color: white; padding: 8px 18px; border-radius: 20px;
+            text-decoration: none; font-size: 14px; font-weight: bold; transition: 0.3s;
+        }
+        .btn-header:hover { background-color: #876243; }
+
+        /* 2. Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--coklat-tua) 0%, var(--coklat-susu) 100%);
+            color: white; padding: 60px 6%; display: flex; align-items: center; justify-content: space-between; gap: 30px;
+        }
+        .hero-text { flex: 1; }
+        .hero-text h1 { font-size: 36px; line-height: 1.25; margin-bottom: 15px; }
+        .hero-text h1 span { color: var(--coklat-muda); }
+        .hero-text p { font-size: 15.5px; margin-bottom: 25px; opacity: 0.95; }
+        
+        .hero-badges { display: flex; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+        .badge { background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 15px; font-size: 13px; border: 1px solid rgba(255,255,255,0.3); }
+
+        .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn-hero {
+            background-color: var(--accent-gold); color: white; padding: 12px 26px;
+            border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s;
+        }
+        .btn-hero:hover { transform: translateY(-2px); }
+
+        .btn-chat-shortcut {
+            background-color: white; color: var(--coklat-tua); padding: 12px 24px;
+            border-radius: 25px; text-decoration: none; font-weight: bold; cursor: pointer; border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: 0.3s;
+        }
+        .btn-chat-shortcut:hover { background-color: var(--cream-bg); }
+
+        /* 3. Global Section Styling */
+        section { padding: 50px 6%; }
+        .section-title { text-align: center; margin-bottom: 35px; }
+        .section-title h2 { font-size: 28px; color: var(--coklat-tua); }
+        .section-title p { color: #666; font-size: 14.5px; }
+
+        /* 4. Statistik & Alasan Pendirian Usaha */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .stat-card {
+            background: white; padding: 25px; border-radius: 12px; text-align: center;
+            box-shadow: 0 4px 12px var(--shadow); border-top: 4px solid var(--coklat-susu);
+        }
+        .stat-card h3 { font-size: 32px; color: var(--coklat-tua); margin-bottom: 5px; }
+        .stat-card p { font-size: 13.5px; color: #555; }
+
+        /* 5. Profil, Visi, Misi */
+        .profile-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .profile-box { background: white; padding: 28px; border-radius: 15px; box-shadow: 0 4px 15px var(--shadow); }
+        .profile-box h3 { color: var(--coklat-tua); margin-bottom: 12px; font-size: 20px; }
+        .profile-box ul { margin-left: 20px; font-size: 14px; }
+
+        /* 6. Fitur Keunggulan */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+        .feature-card { background: white; padding: 22px; border-radius: 12px; box-shadow: 0 4px 12px var(--shadow); }
+        .feature-icon { font-size: 28px; color: var(--coklat-susu); margin-bottom: 10px; }
+        .feature-card h4 { color: var(--coklat-tua); margin-bottom: 8px; }
+        .feature-card p { font-size: 13px; color: #666; }
+
+        /* 7. Paket & Harga CCTV */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+        .price-card {
+            background: white; border-radius: 16px; padding: 25px;
+            box-shadow: 0 6px 18px var(--shadow); border: 1px solid var(--coklat-muda);
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .price-card.popular { border: 2px solid var(--coklat-tua); }
+        .price-card h3 { font-size: 21px; color: var(--coklat-tua); }
+        .price-amount { font-size: 26px; font-weight: bold; color: var(--coklat-susu); margin: 12px 0; }
+        .price-features { list-style: none; margin-bottom: 20px; font-size: 13.5px; }
+        .price-features li { margin-bottom: 8px; }
+        .btn-package {
+            background: var(--coklat-susu); color: white; text-align: center;
+            padding: 10px; border-radius: 20px; text-decoration: none; font-weight: bold; transition: 0.3s;
+        }
+        .btn-package:hover { background: var(--coklat-tua); }
+
+        footer { background: var(--coklat-tua); color: white; text-align: center; padding: 25px; font-size: 13.5px; }
+
+        /* 8. Floating Widget: Asisten Virtual Amber */
+        .chat-widget-button {
+            position: fixed; bottom: 25px; right: 25px;
+            background-color: var(--coklat-susu); color: white;
+            border: none; border-radius: 50px; padding: 14px 22px;
+            font-size: 14.5px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 9999;
+            display: flex; align-items: center; gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .chat-widget-button:hover { background-color: var(--coklat-tua); transform: translateY(-2px); }
+
+        .chat-box {
+            position: fixed; bottom: 85px; right: 25px;
+            width: 360px; max-width: 90%; height: 500px; background: #FAF6F0;
+            border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            display: none; flex-direction: column; overflow: hidden; z-index: 9999;
+            border: 1px solid var(--coklat-muda);
+        }
+        .chat-header {
+            background: var(--coklat-tua); color: white; padding: 14px 18px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .chat-header-info { display: flex; align-items: center; gap: 10px; }
+        .avatar-amber {
+            width: 36px; height: 36px; background: var(--coklat-muda);
+            color: var(--coklat-tua); border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-weight: bold; font-size: 16px;
+        }
+        .chat-messages { flex: 1; padding: 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .message { padding: 10px 13px; border-radius: 12px; font-size: 13px; max-width: 82%; line-height: 1.4; }
+        .bot-msg { background: white; color: #333; align-self: flex-start; border: 1px solid var(--coklat-muda); border-bottom-left-radius: 2px; }
+        .user-msg { background: var(--coklat-susu); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+        
+        .suggestion-btn {
+            background-color: var(--coklat-muda); color: var(--coklat-tua);
+            border: none; padding: 6px 12px; border-radius: 15px; margin-top: 6px;
+            font-size: 12px; cursor: pointer; display: inline-block; font-weight: 500;
+        }
+        .suggestion-btn:hover { background-color: var(--coklat-susu); color: white; }
+
+        .chat-input-area { padding: 10px 12px; background: white; display: flex; gap: 8px; border-top: 1px solid var(--coklat-muda); }
+        .chat-input-area input { flex: 1; padding: 8px 12px; border: 1px solid var(--coklat-muda); border-radius: 20px; outline: none; font-size: 13px; }
+        .chat-input-area button { background: var(--coklat-susu); color: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header Navigation & Logo Perusahaan (Kiri Atas) -->
+    <header>
+        <a href="#" class="logo-container">
+            <img src="WhatsApp Image 2026-11-19 at 08.00.15.jpeg" alt="Logo GYIT CCTV" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo-text">GYIT <span>CCTV</span></div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#tentang">Profil & Visi</a></li>
+                <li><a href="#masalah">Alasan Berdiri</a></li>
+                <li><a href="#keunggulan">Keunggulan</a></li>
+                <li><a href="#paket">Paket Harga</a></li>
+            </ul>
+        </nav>
+        <a href="https://wa.me/681384677857" class="btn-header">Hubungi WA</a>
+    </header>
+
+    <!-- 2. Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <div class="hero-badges">
+                <span class="badge">🛡️ Garansi Pemasangan 6 Bulan</span>
+                <span class="badge">📍 Radius 30 km (Depok, Bogor, Tangerang)</span>
+            </div>
+            <h1>Solusi Pengawasan CCTV <span>Rapi, Terjangkau & Bergaransi</span></h1>
+            <p>Jasa instalasi dan pemeliharaan CCTV profesional oleh teknisi TKJ SMK Al Hasra. Pemasangan rapi dengan pipa pelindung conduit dan monitoring langsung dari Smartphone Anda!</p>
+            <div class="hero-buttons">
+                <a href="#paket" class="btn-hero">Lihat Paket CCTV</a>
+                <button class="btn-chat-shortcut" onclick="toggleChat(); sendQuickReply('Apa itu GYIT?');">💬 Tanya Amber Bot</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Fakta & Alasan Didirikan Usaha -->
+    <section id="masalah">
+        <div class="section-title">
+            <h2>Mengapa GYIT Didirikan?</h2>
+            <p>Berdasarkan pengamatan dan hasil angket kebutuhan warga di sekitar Griya Indah Serpong (GIS)</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>47%</h3>
+                <p>Warga belum memiliki sistem CCTV pengawas rumah/usaha.</p>
+            </div>
+            <div class="stat-card">
+                <h3>40%</h3>
+                <p>Mengeluhkan kabel & perangkat CCTV lama terpasang tidak rapi.</p>
+            </div>
+            <div class="stat-card">
+                <h3>33%</h3>
+                <p>Bingung harus menghubungi siapa saat CCTV mengalami gangguan.</p>
+            </div>
+            <div class="stat-card">
+                <h3>24 Jam</h3>
+                <p>Jaminan maksimal respons teknisi GYIT jika terjadi masalah.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Profil Usaha, Visi, dan Misi -->
+    <section id="tentang" style="background:#F2E9E1;">
+        <div class="section-title">
+            <h2>Profil & Komitmen Perusahaan</h2>
+            <p>Guard Your Integrated Technology (GYIT)</p>
+        </div>
+        <div class="profile-container">
+            <div class="profile-box">
+                <h3>Visi Perusahaan</h3>
+                <p><b>"Menjadi penyedia jasa jaringan yang paling dipercaya Warga di Bogor, Depok, dan Tangerang."</b></p>
+                <br>
+                <h3>Misi Utama</h3>
+                <ul>
+                    <li>Menyediakan instalasi CCTV yang rapi, aman, dan bergaransi dengan harga terjangkau.</li>
+                    <li>Memberikan layanan perawatan berkala dan respons gangguan yang cepat.</li>
+                    <li>Membuka kesempatan kerja paruh waktu bagi pemuda sekitar lingkungan.</li>
+                </ul>
+            </div>
+            <div class="profile-box">
+                <h3>Profil Pendiri Usaha</h3>
+                <p><b>GYIT</b> dirintis oleh tim siswa berprestasi jurusan Teknik Komputer dan Jaringan (TKJ) XII TKJ 1 SMK Al Hasra:</p>
+                <ul style="margin-top: 10px;">
+                    <li><b>Muhammad Kalvin Nur Maulana</b> (Pemilik & Teknisi Utama)</li>
+                    <li><b>Fauzan Ali Akbar</b> (Tim Teknisi)</li>
+                    <li><b>Abdy Ahnabil Refiandra</b> (Tim Teknisi)</li>
+                </ul>
+                <p style="margin-top: 15px; font-size: 13px; color: #555;">Kami mengombinasikan keahlian kurikulum sekolah TKJ dan pengalaman praktik kerja lapangan (PKL) di PT Synotech Solusi Mandiri.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Fitur Keunggulan -->
+    <section id="keunggulan">
+        <div class="section-title">
+            <h2>Keunggulan Utama GYIT</h2>
+            <p>Mengapa pelanggan memilih layanan kami dibanding tukang perorangan biasa</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h4>Garansi Resmi 6 Bulan</h4>
+                <p>Jaminan garansi pemasangan penuh selama 6 bulan sejak serah terima perangkat.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔌</div>
+                <h4>Pemasangan Rapi</h4>
+                <p>Pemasangan menggunakan pipa pelindung conduit agar instalasi rapi dan awet.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h4>Monitoring via Smartphone</h4>
+                <p>Pengaturan akses pantau rekaman kamera secara langsung dari handphone Anda.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📞</div>
+                <h4>Satu Kontak Terpadu</h4>
+                <p>Satu kontak perbaikan yang jelas dan responsif saat CCTV mengalami masalah.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Paket & Harga CCTV -->
+    <section id="paket" style="background:#F2E9E1;">
+        <div class="section-title">
+            <h2>Pilihan Paket Layanan & Harga</h2>
+            <p>Harga terstandar, transparan, dan tanpa biaya tersembunyi</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Paket Basic</h3>
+                <div class="price-amount">Rp3.000.000</div>
+                <ul class="price-features">
+                    <li>✔️ 4 Kamera CCTV HikVision</li>
+                    <li>✔️ 1 NVR HikVision + Harddisk 512GB</li>
+                    <li>✔️ Kabel UTP 1 Rol & 10 RJ45</li>
+                    <li>✔️ Setting Monitoring HP</li>
+                    <li>✔️ Gratis Survei Lokasi</li>
+                </ul>
+                <a href="https://wa.me/681384677857?text=Halo%20GYIT,%20saya%20tertarik%20Paket%20Basic" class="btn-package">Pilih Paket</a>
+            </div>
+            <div class="price-card popular">
+                <h3>Paket STD</h3>
+                <div class="price-amount">Rp4.000.000</div>
+                <ul class="price-features">
+                    <li>✔️ 4 Kamera CCTV HikVision</li>
+                    <li>✔️ 1 NVR HikVision + Harddisk 512GB</li>
+                    <li>✔️ Kabel UTP 1 Rol & 10 RJ45</li>
+                    <li>✔️ Setting Monitoring HP</li>
+                    <li>✔️ <b>Garansi Resmi 6 Bulan</b></li>
+                </ul>
+                <a href="https://wa.me/681384677857?text=Halo%20GYIT,%20saya%20tertarik%20Paket%20STD" class="btn-package">Pilih Paket</a>
+            </div>
+            <div class="price-card">
+                <h3>Paket Premium</h3>
+                <div class="price-amount">Rp5.000.000</div>
+                <ul class="price-features">
+                    <li>✔️ 6 Kamera CCTV Dahua</li>
+                    <li>✔️ 1 NVR Dahua + Harddisk 2x1TB</li>
+                    <li>✔️ Kabel UTP 1 Rol & 18 RJ45</li>
+                    <li>✔️ 10 Pipa Pelindung Conduit (3m)</li>
+                    <li>✔️ <b>Garansi Resmi 6 Bulan</b></li>
+                </ul>
+                <a href="https://wa.me/681384677857?text=Halo%20GYIT,%20saya%20tertarik%20Paket%20Premium" class="btn-package">Pilih Paket</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Footer & Kontak -->
+    <footer id="kontak">
+        <p><b>GYIT (Guard Your Integrated Technology)</b></p>
+        <p>Pusat Operasional: SMK Al Hasra, Jl. Raya Ciputat - Parung KM. 24, Kel. Bojongsari Baru, Kec. Bojongsari, Depok.</p>
+        <p>Wilayah Layanan: Depok, Bogor, Tangerang (Radius 30 km) | WhatsApp: +62 813-8467-7857</p>
+        <br>
+        <p>&copy; 2026 GYIT. All Rights Reserved.</p>
+    </footer>
+
+    <!-- 8. WIDGET CHATBOT FLOATING: ASISTEN VIRTUAL AMBER -->
+    <button class="chat-widget-button" onclick="toggleChat()">
+        💬 Tanya Amber
+    </button>
+
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="avatar-amber">A</div>
+                <div>
+                    <h4 style="font-size:14px; margin:0;">Asisten Virtual Amber</h4>
+                    <p style="font-size:10.5px; margin:0; opacity:0.85;">Asisten Resmi Perusahaan GYIT</p>
+                </div>
+            </div>
+            <button style="background:none; border:none; color:white; font-size:18px; cursor:pointer;" onclick="toggleChat()">✖</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-msg">
+                Halo! Selamat datang di GYIT 😊. Saya <b>Asisten Virtual Amber</b> yang siap memberikan jawaban ramah terkait lokasi kantor, bio perusahaan, paket harga CCTV, hingga rincian modal GYIT!
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="userInput" placeholder="Ketik pertanyaan Anda..." onkeypress="if(event.key==='Enter') sendMsg()">
+            <button onclick="sendMsg()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            var box = document.getElementById('chatBox');
+            box.style.display = (box.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function sendQuickReply(text) {
+            document.getElementById('userInput').value = text;
+            sendMsg();
+        }
+
+        function sendMsg() {
+            var input = document.getElementById('userInput');
+            var txt = input.value.trim();
+            if(!txt) return;
+
+            // Tampilkan Pesan Pengunjung
+            appendMsg(txt, 'user-msg');
+            input.value = '';
+
+            // Proses Respon Amber
+            setTimeout(function() {
+                var reply = getAmberResponse(txt);
+                appendMsg(reply, 'bot-msg');
+            }, 400);
+        }
+
+        function appendMsg(text, className) {
+            var container = document.getElementById('chatMessages');
+            var msgDiv = document.createElement('div');
+            msgDiv.className = 'message ' + className;
+            msgDiv.innerHTML = text;
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Logika Respon Asisten Virtual Amber Berdasarkan Proposal Bisnis GYIT
+        function getAmberResponse(input) {
+            var q = input.toLowerCase();
+
+            // 1. BIO GYIT & PERUSAHAAN
+            if (q.includes('apa itu') || q.includes('bio') || q.includes('pendiri') || q.includes('pemilik') || q.includes('profil') || q.includes('gyit')) {
+                return "<b>GYIT (Guard Your Integrated Technology)</b> adalah usaha jasa berskala mikro di bidang instalasi dan perawatan CCTV serta jaringan IT 😊.<br><br>" +
+                       "Usaha ini dirintis oleh tim siswa XII TKJ 1 SMK Al Hasra:<br>" +
+                       "• <b>Muhammad Kalvin Nur Maulana</b> (Pemilik & Utama)<br>" +
+                       "• <b>Fauzan Ali Akbar</b> (Tim Teknisi)<br>" +
+                       "• <b>Abdy Ahnabil Refiandra</b> (Tim Teknisi)";
+            }
+
+            // 2. ALASAN DIDIRIKAN GYIT
+            if (q.includes('alasan') || q.includes('mengapa') || q.includes('latar belakang') || q.includes('tujuan')) {
+                return "GYIT didirikan berdasarkan kebutuhan nyata masyarakat 😊:<br>" +
+                       "1. <b>Risiko Pencurian:</b> Maraknya kasus pencurian di permukiman (seperti di Parung Panjang & Pondok Cabe Udik).<br>" +
+                       "2. <b>Hasil Angket Warga GIS:</b> 47% warga belum punya CCTV, 40% mengeluhkan kabel tidak rapi, dan 33% bingung menghubungi siapa saat teknis bermasalah.<br>" +
+                       "3. <b>Solusi GYIT:</b> Menjadi penyedia layanan terstandar, bergaransi 6 bulan, dan terjangkau untuk skala warga/UMKM.";
+            }
+
+            // 3. LOKASI & ALAMAT OPERASIONAL
+            if (q.includes('alamat') || q.includes('lokasi') || q.includes('kantor') || q.includes('jangkauan') || q.includes('mana')) {
+                return "📍 <b>Pusat Operasional:</b> SMK Al Hasra, Jl. Raya Ciputat - Parung KM. 24, Kel. Bojongsari Baru, Kec. Bojongsari, Kota Depok.<br><br>" +
+                       "🚗 <b>Jangkauan Layanan:</b> Radius 30 km dari Griya Indah Serpong (mencakup Depok, Bogor, dan Tangerang).";
+            }
+
+            // 4. PRODUK, PAKET & HARGA CCTV
+            if (q.includes('paket') || q.includes('harga') || q.includes('biaya') || q.includes('produk') || q.includes('layanan')) {
+                return "Berikut paket layanan transparan dari GYIT 😊:<br>" +
+                       "🔹 <b>Paket Basic (Rp3.000.000):</b> 4 Kamera & NVR HikVision, Harddisk 512GB, Kabel 1 Rol, 10 RJ45, Setting HP.<br>" +
+                       "🔹 <b>Paket STD (Rp4.000.000):</b> 4 Kamera & NVR HikVision, Harddisk 512GB, Setting HP + <b>Garansi 6 Bulan</b>.<br>" +
+                       "🔹 <b>Paket Premium (Rp5.000.000):</b> 6 Kamera & NVR Dahua, Harddisk 2x1TB, 10 Pipa Conduit, Setting HP + <b>Garansi 6 Bulan</b>.<br>" +
+                       "🛠️ <b>Jasa Perawatan Bulanan:</b> Rp500.000/bulan.";
+            }
+
+            // 5. MODAL & KEUANGAN GYIT
+            if (q.includes('modal') || q.includes('keuangan') || q.includes('laba') || q.includes('bep') || q.includes('investasi') || q.includes('omset')) {
+                return "Berikut rincian keuangan usaha GYIT berdasarkan proposal bisnis 😊:<br>" +
+                       "💰 <b>Modal Awal:</b> Rp20.385.078<br>" +
+                       "📊 <b>Biaya Operasional:</b> Rp950.000/bulan<br>" +
+                       "📈 <b>Proyeksi Pendapatan:</b> Rp17.200.000/bulan<br>" +
+                       "💵 <b>Proyeksi Laba Bersih:</b> Rp5.955.000/bulan (Margin ±40.8%)<br>" +
+                       "⏱️ <b>Waktu Balik Modal (Payback):</b> ±3.4 bulan (BEP Rp810.500/bulan).";
+            }
+
+            // 6. DETEKSI TYPO / KEMIRIPAN KATA (AUTO-SUGGESTION)
+            var typoPaket = ['pket', 'haga', 'bya', 'pake', 'cctv', 'harag'];
+            var typoLokasi = ['almat', 'lkasi', 'dmana', 'dpok', 'bogor', 'alamt'];
+            var typoBio = ['biogyt', 'profil', 'pemliik', 'siapa', 'pendir'];
+            var typoModal = ['mdal', 'kuangan', 'unung', 'lba'];
+
+            for (var i = 0; i < typoPaket.length; i++) {
+                if (q.includes(typoPaket[i])) {
+                    return "Mungkin maksud Anda seperti ini: <br><button class=\"suggestion-btn\" onclick=\"sendQuickReply('Daftar Paket CCTV')\">Daftar Paket & Harga CCTV</button>";
+                }
+            }
+            for (var j = 0; j < typoLokasi.length; j++) {
+                if (q.includes(typoLokasi[j])) {
+                    return "Mungkin maksud Anda seperti ini: <br><button class=\"suggestion-btn\" onclick=\"sendQuickReply('Alamat dan Lokasi')\">Lokasi & Alamat GYIT</button>";
+                }
+            }
+            for (var k = 0; k < typoBio.length; k++) {
+                if (q.includes(typoBio[k])) {
+                    return "Mungkin maksud Anda seperti ini: <br><button class=\"suggestion-btn\" onclick=\"sendQuickReply('Apa itu GYIT?')\">BIO & Profil Pendiri GYIT</button>";
+                }
+            }
+            for (var m = 0; m < typoModal.length; m++) {
+                if (q.includes(typoModal[m])) {
+                    return "Mungkin maksud Anda seperti ini: <br><button class=\"suggestion-btn\" onclick=\"sendQuickReply('Modal dan Keuangan')\">Rencana Modal & Keuangan GYIT</button>";
+                }
+            }
+
+            // 7. JIKA PERTANYAAN TIDAK DIKETAHUI
+            return "Maaf untuk sekarang saya tidak bisa memberitahukan hal tersebut";
+        }
+    </script>
+</body>
+</html>
